@@ -1,0 +1,20 @@
+{
+	"options" : {
+		"app"     : "thunderbird",
+		"ver"     : 102,
+		"esr"     : true,
+		"doc"     : 0,
+
+		"rfp"     : false,
+		"session" : true,
+		"public"  : true,
+		"hard"    : true,
+
+		"webgl"   : 0,
+		"webrtc"  : false,
+		"warn"    : false,
+		"debug"   : false,
+
+		"config_OAuth" : false
+	}
+}

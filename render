@@ -1,0 +1,261 @@
+#! /usr/bin/env python3
+
+# user.js renderer v0.1.0
+# Copyright © 2021, 2022, 2023 Boian Berberov
+#
+# Licensed under the EUPL-1.2 only.
+# License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+# SPDX-License-Identifier: EUPL-1.2
+
+import os
+import argparse
+import json
+import pprint
+from jinja2 import Environment, BaseLoader, FileSystemLoader, Template, meta as JinjaMeta, exceptions as JinjaExceptions
+
+#
+# Command line options
+#
+argp = argparse.ArgumentParser(
+	description = 'Utility for creating Mozilla user.js configuration files'
+)
+
+# Global arguments
+argp.add_argument(
+	'-c','--config',
+	help = 'The configuration file to load a render options and a template list',
+	metavar = '<filename>'
+)
+argp.add_argument(
+	'-d', '--dir',
+	help ="The directory where the templates are located.  By default it's ./templates",
+	metavar='<dir>',
+	default ='templates'
+)
+argp.add_argument(
+	'--app',
+	help = 'Override app',
+	metavar = '<appname>'
+)
+argp.add_argument(
+	'--ver',
+	help = 'Override ver',
+	type = int,
+	metavar = '<ver>'
+)
+
+# Shared argument parsers
+shared_argp_file = argparse.ArgumentParser(add_help=False)
+shared_argp_file.add_argument(
+	'file',
+	help = 'Template file',
+	metavar = '<filename>'
+)
+
+shared_argp_clude = argparse.ArgumentParser(add_help=False)
+shared_argp_clude.add_argument(
+	'--include',
+	nargs='+',
+	action='append'
+)
+shared_argp_clude.add_argument(
+	'--exclude',
+	nargs='+',
+	action='append'
+)
+
+# Subcommands
+argp_commands = argp.add_subparsers(
+	title = 'Commands',
+	dest = 'command',
+	required = True
+)
+
+# build command
+argp_build = argp_commands.add_parser(
+	'build',
+	help = 'Build a new user.js configuration file',
+	parents = [
+		shared_argp_clude
+	]
+)
+argp_build.add_argument(
+	'--comments',
+	help = 'Override comments',
+	type = int,
+	metavar = '<level>'
+)
+
+# examine command
+argp_examine = argp_commands.add_parser(
+	'examine',
+	help = 'Examine a template file',
+	parents = [
+		shared_argp_file
+	]
+)
+
+# test command
+argp_test = argp_commands.add_parser(
+	'test',
+	help = 'Tests comments rendering for a single template',
+	parents = [
+		shared_argp_file
+	]
+)
+
+# Parse
+args = argp.parse_args()
+
+# Checks
+if not os.path.isdir(args.dir):
+	print("Could not find directory: " + args.dir)
+	exit(1)
+
+#
+# Default configuration
+#
+
+# Set up environment
+jinjaEnv = Environment(
+	line_statement_prefix = '%%',
+	line_comment_prefix   = '##',
+	trim_blocks           = False,
+	lstrip_blocks         = True,
+	keep_trailing_newline = False,
+	loader                = FileSystemLoader(args.dir)
+)
+
+# Default options
+options = {
+	'app'     : 'firefox',
+	'ver'     : 102,
+	'esr'     : False,
+	'doc'     : 0,
+
+	'rfp'     : True,
+	'session' : True,
+	'public'  : True,
+	'hard'    : True,
+
+	'webgl'   : 0,
+	'webrtc'  : False,
+	'warn'    : False,
+	'debug'   : False
+}
+
+includeset = set()
+excludeset = set()
+
+#
+# Evaluate global options
+#
+
+# Load configuration from file, if specified
+if args.config:
+	with open(args.config) as configfile:
+		config = json.load(configfile)
+
+		if "options" in config:
+			options.update(    config["options"] )
+		if "include" in config:
+			includeset.update( config["include"] )
+		if "exclude" in config:
+			excludeset.update( config["exclude"] )
+
+# Override configuration options from command line, if specified
+if args.app:
+	options["app"] = args.app
+
+if args.ver:
+	options["ver"] = args.ver
+
+#
+# Execute commands
+#
+
+if args.command == 'build':
+
+	# Override configuration options from command line, if specified
+	if args.comments:
+		options["comments"] = args.comments
+	if args.include:
+		# Flatten list of lists
+		includeset.update( [i for l in args.include for i in l] )
+	if args.exclude:
+		# Flatten list of lists
+		excludeset.update( [i for l in args.exclude for i in l] )
+
+	templates = set( jinjaEnv.list_templates(extensions='*.js') )
+	if 0 < len(includeset):
+		templates.intersection_update(includeset)
+	templates.difference_update(excludeset)
+
+	# Render templates
+	for filename in sorted(templates):
+		template = jinjaEnv.get_template(filename)
+		text = template.render(options)
+		print(text)
+	exit(0)
+
+elif args.command == 'examine':
+
+	# Override configuration options from command line, if specified
+	if args.app:
+		options["app"] = args.app
+	if args.ver:
+		options["ver"] = args.ver
+
+	loader = FileSystemLoader('')
+
+	(source, filename, uptodate) = loader.get_source(jinjaEnv, args.file)
+
+	ast = jinjaEnv.parse( source )
+
+	print("Referenced templates")
+	pprint.pp( list( JinjaMeta.find_referenced_templates(ast) ) )
+	print()
+	print("Undeclared variables")
+	pprint.pp(JinjaMeta.find_undeclared_variables(ast))
+	exit(0)
+
+elif args.command == 'test':
+
+	absdir = os.path.abspath(args.dir)
+	absfile = os.path.abspath(args.file)
+	if os.path.commonpath( [absdir, absfile] ) == absdir:
+		relfile = os.path.relpath(args.file, start=absdir)
+	else:
+		relfile = args.file
+
+	template = jinjaEnv.get_template(relfile)
+
+	options.update(doc = 0)
+	text = template.render(options)
+	print(text)
+	print('================================================================================')
+
+	options.update(doc = 1)
+	text = template.render(options)
+	print(text)
+	print('================================================================================')
+
+	options.update(doc = 2)
+	text = template.render(options)
+	print(text)
+	print('================================================================================')
+
+	options.update(doc = 3)
+	text = template.render(options)
+	print(text)
+	print('================================================================================')
+
+	options.update(doc = 4)
+	text = template.render(options)
+	print(text)
+	print('================================================================================')
+
+else:
+
+	print("Unknown command: " + args.command)
+	exit(1)

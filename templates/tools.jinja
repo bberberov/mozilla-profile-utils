@@ -1,0 +1,77 @@
+{#-
+	Copyright © 2021, 2022, 2023 Boian Berberov
+
+	Licensed under the EUPL-1.2 only.
+	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+	SPDX-License-Identifier: EUPL-1.2
+-#}
+
+%%  macro comment(level, text)
+%%  if doc is not defined
+%%  	set doc = 3
+%%  endif
+{%  if level == 1 and level <= doc %}
+/*
+ *  {{text}}
+ */
+{%  elif level == 2 and level <= doc %}
+/* {{text}} */
+{%  elif level == 3 -%}
+{%  	if level <= doc %}	// {{text}}
+{%- 	else  -%}
+{%- 	endif %}
+%%  else
+%%  endif
+%%  endmacro
+
+%%  macro use_bool(value)
+{%- if value == True %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro not_bool(value)
+{%- if value == True %}false{%else%} true{% endif -%}
+%%  endmacro
+
+%%  macro or_bool(value1, value2)
+{%- if value1 == True  or value2 == True %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro and_bool(value1, value2)
+{%- if value1 == True and value2 == True %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro use_vals(value, ontrue, onfalse)
+{%- if value == True %}{{ ontrue }}{%else%}{{ onfalse }}{% endif -%}
+%%  endmacro
+
+%%  macro lt_bool(value, threshhold)
+{%- if value <= threshhold %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro lte_bool(value, threshhold)
+{%- if value <= threshhold %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro lt_vals(value, threshhold, ontrue, onfalse)
+{%- if value <= threshhold %}{{ ontrue }}{%else%}{{ onfalse }}{% endif -%}
+%%  endmacro
+
+%%  macro lte_vals(value, threshhold, ontrue, onfalse)
+{%- if value <= threshhold %}{{ ontrue }}{%else%}{{ onfalse }}{% endif -%}
+%%  endmacro
+
+%%  macro gt_bool(value, threshhold)
+{%- if value > threshhold %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro gte_bool(value, threshhold)
+{%- if value >= threshhold %} true{%else%}false{% endif -%}
+%%  endmacro
+
+%%  macro gt_vals(value, threshhold, ontrue, onfalse)
+{%- if value > threshhold %}{{ ontrue }}{%else%}{{ onfalse }}{% endif -%}
+%%  endmacro
+
+%%  macro gte_vals(value, threshhold, ontrue, onfalse)
+{%- if value >= threshhold %}{{ ontrue }}{%else%}{{ onfalse }}{% endif -%}
+%%  endmacro

@@ -1,0 +1,20 @@
+{
+	"options" : {
+		"app"     : "firefox",
+		"ver"     : 115,
+		"esr"     : false,
+		"doc"     : 0,
+
+		"rfp"     : true,
+		"session" : false,
+		"public"  : true,
+		"hard"    : true,
+
+		"webgl"   : 0,
+		"webrtc"  : false,
+		"warn"    : false,
+		"debug"   : false,
+
+		"config_homepage" : [ "https://github.com/bberberov/mozilla-profile-utils" ]
+	}
+}

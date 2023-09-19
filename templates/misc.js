@@ -30,6 +30,7 @@ user_pref("security.csp.enable",          true);
 
 %%  endif
 user_pref("security.dialog_enable_delay", 1500);
+##
 
 {{- comment(2, "Other") -}}
 

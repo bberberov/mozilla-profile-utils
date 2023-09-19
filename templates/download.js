@@ -22,6 +22,7 @@ user_pref("browser.download.hide_plugins_without_extensions",      false);
 user_pref("browser.download.forbid_open_with",                     {{ use_bool(public) }});
 %%  endif
 user_pref("browser.download.manager.addToRecentDocs",              false);
+##
 
 {{- comment(2, "Protocol Handlers") -}}
 

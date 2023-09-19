@@ -14,6 +14,7 @@
 
 user_pref("media.navigator.enabled",                  false);
 user_pref("media.navigator.video.enabled",            false);
+##
 
 {{- comment(2, "WebRTC") -}}
 

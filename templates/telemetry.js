@@ -1,5 +1,5 @@
 {#-
-	Copyright © 2021, 2022, 2023 Boian Berberov
+	Copyright © 2021, 2022, 2023, 2026 Boian Berberov
 
 	Licensed under the EUPL-1.2 only.
 	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
@@ -15,14 +15,17 @@
 %%  if ver < 101
 user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 %%  endif
+%%  if true
 user_pref("dom.ipc.plugins.reportCrashURL",                         false);
-##
+%%  endif
 
 {{- comment(2, "Telemetry") -}}
 
+%%  if true
 user_pref("toolkit.telemetry.archive.enabled",            false);
 user_pref("toolkit.telemetry.enabled",                    false);
 user_pref("toolkit.telemetry.unified",                    false);
+%%  endif
 %%  if 57 <= ver
 user_pref("toolkit.telemetry.bhrPing.enabled",            false);
 user_pref("toolkit.telemetry.firstShutdownPing.enabled",  false);
@@ -42,13 +45,17 @@ user_pref("toolkit.telemetry.updatePing.enabled",         false);
 
 {{- comment(2, "Telemetry - Coverage") -}}
 
+%%  	if true
 user_pref("toolkit.coverage.enabled",          false);
+%%  	endif
 %%  	if 64 <= ver
 user_pref("toolkit.coverage.opt-out",           true);
 	{{- comment(3, "(Hidden)") -}}
 %%  	endif
+%%  	if true
 user_pref("toolkit.telemetry.coverage.opt-out", true);
 	{{- comment(3, "(Hidden)") -}}
+%%  	endif
 
 %%  endif
 
@@ -65,12 +72,14 @@ user_pref("network.allow-experiments", false);
 
 user_pref("browser.selfsupport.enabled", false);
 	{{- comment(3, "(Hidden)") -}}
-
 %%  endif
 
 {{- comment(2, "Crash Reporting") -}}
 
+%%  if true
 user_pref("breakpad.reportURL",                                   "");
+%%  endif
+
 %%  if app == 'firefox'
 
 %%  	if 58 <= ver
@@ -79,12 +88,10 @@ user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 %%  	else
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit",  false);
 %%  	endif
-
 %%  	if 51 <= ver
 user_pref("browser.crashReports.unsubmittedCheck.enabled",     false);
 	{{- comment(3, "(Default)") -}}
 %%  	endif
-
 %%  	if 44 <= ver
 user_pref("browser.tabs.crashReporting.sendReport",            false);
 %%  	endif
@@ -93,17 +100,21 @@ user_pref("browser.tabs.crashReporting.sendReport",            false);
 
 {{- comment(2, "Health Reporting") -}}
 
+%%  if true
 user_pref("datareporting.healthreport.uploadEnabled",   false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
+%%  endif
 
 %%  if app == 'firefox'
 
 {{- comment(2, "Telemetry - Activity Stream") -}}
 
+%%  	if true
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry",       false);
+%%  	endif
 
-%%  	if 57 <= ver
+%%  	if 57 <= ver and ver < 123
 
 {{- comment(2, "Telemetry - PingCentre") -}}
 
@@ -131,7 +142,6 @@ user_pref("app.normandy.enabled",             false);
 user_pref("app.normandy.api_url",                "");
 user_pref("app.shield.optoutstudies.enabled", false);
 %%  		endif
-
 %%  	endif
 
 %%  endif
@@ -142,5 +152,4 @@ user_pref("app.shield.optoutstudies.enabled", false);
 
 user_pref("extensions.webcompat-reporter.enabled", false);
 	{{- comment(3, "(Default)") -}}
-
 %%  endif

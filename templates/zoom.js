@@ -15,7 +15,7 @@
 
 user_pref("browser.zoom.full",            true);
 	{{- comment(3, "(Default)") -}}
-// user_pref("browser.zoom.siteSpecific", true);
+// user_pref("browser.zoom.siteSpecific",    true);
 	{{- comment(3, "(Default) FINGERPRINTING") -}}
 user_pref("zoom.minPercent", {{ ( config_zoomValues | first * 100 ) | int }});
 user_pref("zoom.maxPercent", {{ ( config_zoomValues | last  * 100 ) | int }});

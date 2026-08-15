@@ -8,11 +8,12 @@
 
 %%  from 'tools.jinja' import comment with context
 
-## Some settings are available in Thunderbird
+{#- Some settings are available in Thunderbird -#}
 %%  if app == 'firefox'
 
 {{- comment(1, "Session Store") -}}
 
+%%  	if true
 // user_pref("browser.sessionstore.idleDelay",                    180000);
 	{{- comment(3, "(ms) (Default) Time before using interval.idle") -}}
 user_pref("browser.sessionstore.interval",                    2073600000);
@@ -30,6 +31,7 @@ user_pref("browser.sessionstore.resume_session_once",              false);
 	{{- comment(3, "(Default)") -}}
 user_pref("browser.sessionstore.resuming_after_os_restart",        false);
 	{{- comment(3, "(Default)") -}}
+%%  	endif
 
 {{- comment(2, "On reboot") -}}
 

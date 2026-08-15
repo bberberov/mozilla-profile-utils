@@ -1,5 +1,5 @@
 {#-
-	Copyright © 2021, 2022, 2023 Boian Berberov
+	Copyright © 2021, 2022, 2023, 2026 Boian Berberov
 
 	Licensed under the EUPL-1.2 only.
 	License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
@@ -20,12 +20,16 @@ user_pref("javascript.enabled", false);
 
 {{- comment(2, "Miscellaneous") -}}
 
+%%  if true
 user_pref("dom.allow_scripts_to_close_windows", false);
 	{{- comment(3, "(Default)") -}}
+%%  endif
 %%  if 84 <= ver
 user_pref("dom.block_download_insecure",         true);
 %%  endif
+%%  if true
 user_pref("dom.popup_maximum",                      3);
+%%  endif
 %%  if ver < 103
 user_pref("dom.ipc.shims.enabledWarnings",       true);
 %%  endif
@@ -43,11 +47,9 @@ user_pref("dom.storage.default_quota",      {{ config_domStorageQuota }});
 user_pref("dom.storage.default_site_quota", {{ config_domStorageQuota }});
 %%  	endif
 %%  endif
-
 %%  if 65 <= ver and ver < 102
 user_pref("dom.storage.next_gen",                 true);
 %%  endif
-
 %%  if 98 <= ver
 user_pref("dom.fs.enabled",                      false);
 %%  endif
@@ -72,14 +74,19 @@ user_pref("dom.presentation.receiver.enabled",       false);
 %%  if ver < 59
 user_pref("camera.control.face_detection.enabled", false);
 %%  endif
+%%  if true
 // user_pref("device.sensors.enabled",                false); // In FINGERPRINTING
+%%  endif
+%%  if ver < 116
 user_pref("device.storage.enabled",                false);
+%%  endif
 %%  if ver < 52
 user_pref("dom.battery.enabled",                   false);
 %%  endif
 %%  if ver < 59
 user_pref("dom.flyweb.enabled",                    false);
 %%  endif
+%%  if true
 // user_pref("dom.gamepad.enabled",                   false); // In FINGERPRINTING
 user_pref("dom.imagecapture.enabled",              false);
 	{{- comment(3, "(Default)") -}}
@@ -87,75 +94,99 @@ user_pref("dom.imagecapture.enabled",              false);
 user_pref("dom.vibrator.enabled",                  false);
 // user_pref("dom.vr.enabled",                        false);
 	{{- comment(3, "(Default false since 97)") -}}
-##
+%%  endif
 
 {{- comment(2, "Acceleration and JIT") -}}
 
-user_pref("javascript.options.asmjs",                 false);
+%%  if true
+user_pref("javascript.options.asmjs",                              false);
 	{{- comment(3, "http://asmjs.org/") -}}
-// user_pref("javascript.options.blinterp",              false);
-// user_pref("javascript.options.baselinejit",           false);
-// user_pref("javascript.options.ion",                   false);
+// user_pref("javascript.options.blinterp",                           false);
+// user_pref("javascript.options.baselinejit",                        false);
+%%  endif
+%%  if 116 <= ver
+// user_pref("javascript.options.content_process_write_protect_code", false);
+	{{- comment(3, "(Default true only on OpenBSD)") -}}
+%%  endif
+%%  if true
+// user_pref("javascript.options.ion",                                false);
+%%  endif
 %%  if 75 <= ver
-// user_pref("javascript.options.jit_trustedprincipals",  true);
+// user_pref("javascript.options.jit_trustedprincipals",               true);
 	{{- comment(3, "(Hidden)") -}}
 %%  endif
 %%  if 52 <= ver
-user_pref("javascript.options.wasm",                  false);
+user_pref("javascript.options.wasm",                               false);
 	{{- comment(3, "https://en.wikipedia.org/wiki/WebAssembly") -}}
 %%  endif
 %%  if ver < 104
-// user_pref("javascript.options.wasm_simd",             false);
+// user_pref("javascript.options.wasm_simd",                          false);
 %%  endif
 %%  if 98 <= ver
-user_pref("javascript.options.wasm_simd_avx",         false);
+user_pref("javascript.options.wasm_simd_avx",                      false);
 %%  endif
-user_pref("javascript.options.shared_memory",         false);
-##
+%%  if true
+user_pref("javascript.options.shared_memory",                      false);
+%%  endif
+
 {{- comment(2, "Events") -}}
 
+%%  if true
 // user_pref("dom.event.contextmenu.enabled",  false);
 // user_pref("dom.w3c_pointer_events.enabled", false); // In FINGERPRINTING
 // user_pref("dom.w3c_touch_events.enabled",       0); // In FINGERPRINTING
-##
+%%  endif
 
 {{- comment(2, "Other APIs") -}}
 
+%%  if true
 user_pref("canvas.capturestream.enabled",               false);
-// user_pref("dom.enable_performance",	                   false);	// In FINGERPRINTING
-// user_pref("dom.enable_performance_navigation_timing",   false);	// In FINGERPRINTING
-// user_pref("dom.enable_performance_observer",	           false);	// In FINGERPRINTING
-// user_pref("dom.enable_resource_timing",                 false);	// In FINGERPRINTING
+// user_pref("dom.enable_performance",                     false); // In FINGERPRINTING
+// user_pref("dom.enable_performance_navigation_timing",   false); // In FINGERPRINTING
+// user_pref("dom.enable_performance_observer",            false); // In FINGERPRINTING
+// user_pref("dom.enable_resource_timing",                 false); // In FINGERPRINTING
+%%  endif
 %%  if ver < 59
 user_pref("dom.idle-observers-api.enabled",             false);
 %%  endif
-
 %%  if 53 <= ver and ver < 100
 user_pref("dom.IntersectionObserver.enabled",           {{ not_bool(hard) }});
 %%  endif
-
 %%  if ver < 91
 user_pref("dom.mozTCPSocket.enabled",                   false);
 %%  endif
+%%  if true
 // user_pref("dom.netinfo.enabled",                        false); // In FINGERPRINTING
+%%  endif
 %%  if 44 <= ver
 user_pref("dom.push.enabled",                           false);
 user_pref("dom.push.connection.enabled",                false);
 %%  endif
+%%  if true
 user_pref("dom.serviceWorkers.enabled",                 {{ not_bool(hard) }});
+%%  endif
 %%  if 65 <= ver
 user_pref("dom.targetBlankNoOpener.enabled",             true);
 %%  endif
 %%  if ver < 52
 user_pref("dom.telephony.enabled",                      false);
 %%  endif
+%%  if true
 user_pref("dom.webaudio.enabled",                       false);
+%%  endif
 %%  if 22 <= ver
 // user_pref("dom.webnotifications.enabled",               false);
 %%  endif
 %%  if 44 <= ver
 // user_pref("dom.webnotifications.serviceworker.enabled", false);
 %%  endif
+%%  if 151 <= ver
+user_pref("dom.webserial.enabled",                      false);
+user_pref("dom.xslt.enabled",                            true);
+	{{- comment(3, "(Default true)") -}}
+%%	endif
+%%  if true
 // user_pref("media.video_stats.enabled",                  false); // In FINGERPRINTING
 // user_pref("media.webspeech.recognition.enable",         false); // In FINGERPRINTING
 // user_pref("media.webspeech.synth.enabled",              false); // In FINGERPRINTING
+%%  endif

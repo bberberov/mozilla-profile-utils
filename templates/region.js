@@ -16,4 +16,6 @@ user_pref("browser.region.network.url",       "");
 %%  if 79 <= ver
 user_pref("browser.region.update.enabled", false);
 %%  endif
+%%  if true
 user_pref("browser.search.region",          "US");
+%%  endif

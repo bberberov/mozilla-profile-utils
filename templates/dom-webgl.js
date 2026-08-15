@@ -12,20 +12,28 @@
 
 %%  if app == 'firefox'
 
+%%  	if true
 user_pref("webgl.disabled",      {{ lte_bool(webgl, 0) }});
 	{{- comment(3, "Use NoScript to manage WebGL") -}}
 user_pref("webgl.enable-webgl2", {{ gte_bool(webgl, 2) }});
-##
+%%  	endif
 
 {{- comment(2, "Limit") -}}
 
 %%  	if ver < 74
 user_pref("webgl.disable-extensions",                        true);
 %%  	endif
+%%  	if true
 user_pref("webgl.disable-fail-if-major-performance-caveat",  true);
 	{{- comment(3, "(Default true since 86)") -}}
 // user_pref("webgl.min_capability_mode",                      {{ lte_bool(webgl, 1) }});
+%%  	endif
+
 %%  elif app == 'thunderbird'
+
+%%  	if true
 user_pref("webgl.disabled",       true);
 user_pref("webgl.enable-webgl2", false);
+%%  	endif
+
 %%  endif

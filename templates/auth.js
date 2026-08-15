@@ -13,7 +13,6 @@
 %%  if 41 <= ver
 user_pref("network.auth.subresource-http-auth-allow", 1);
 %%  endif
-
 %%  if 91 <= ver
-// user_pref("network.http.windows-sso.enabled",  false);
+// user_pref("network.http.windows-sso.enabled",      false);
 %%  endif

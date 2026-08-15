@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 # user.js renderer v0.1.0
-# Copyright © 2021, 2022, 2023 Boian Berberov
+# Copyright © 2021, 2022, 2023, 2026 Boian Berberov
 #
 # Licensed under the EUPL-1.2 only.
 # License text: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
@@ -42,6 +42,12 @@ argp.add_argument(
 	help = 'Override ver',
 	type = int,
 	metavar = '<ver>'
+)
+argp.add_argument(
+	'--doc',
+	help = 'Override doc',
+	type = int,
+	metavar = '<doc>'
 )
 
 # Shared argument parsers
@@ -129,7 +135,7 @@ jinjaEnv = Environment(
 # Default options
 options = {
 	'app'     : 'firefox',
-	'ver'     : 102,
+	'ver'     : 153,
 	'esr'     : False,
 	'doc'     : 0,
 
@@ -169,6 +175,9 @@ if args.app:
 
 if args.ver:
 	options["ver"] = args.ver
+
+if args.doc:
+	options["doc"] = args.doc
 
 #
 # Execute commands

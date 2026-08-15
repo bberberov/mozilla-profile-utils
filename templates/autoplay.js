@@ -14,11 +14,11 @@
 user_pref("media.autoplay.enabled",                   false);
 user_pref("media.block-autoplay-until-in-foreground",  true);
 %%  elif ver < 69
-user_pref("media.autoplay.default",         1);
-user_pref("media.autoplay.allow-muted", false);
+user_pref("media.autoplay.default",                       1);
+user_pref("media.autoplay.allow-muted",               false);
 %%  else
-user_pref("media.autoplay.default",         5);
+user_pref("media.autoplay.default",                       5);
 %%  endif
 %%  if 78 <= ver
-user_pref("media.autoplay.blocking_policy", 2);
+user_pref("media.autoplay.blocking_policy",               2);
 %%  endif

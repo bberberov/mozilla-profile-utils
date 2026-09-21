@@ -103,7 +103,7 @@ user_pref("privacy.cpd.history",         {{ use_bool(session) }});
 %%  endif
 %%  if app == 'firefox'
 user_pref("privacy.cpd.offlineApps",     {{ or_bool(public, session) }});
-// user_pref("privacy.cpd.openWindows",   true);
+// user_pref("privacy.cpd.openWindows",      true);
 user_pref("privacy.cpd.passwords",       false);
 	{{- comment(3, "(Default)") -}}
 user_pref("privacy.cpd.sessions",        {{ or_bool(public, session) }});
@@ -113,6 +113,7 @@ user_pref("privacy.cpd.siteSettings",    false);
 // user_pref("privacy.sanitize.timeSpan",       0);
 %%  endif
 %%  if 128 <= ver
+##
 // user_pref("privacy.clearHistory.browsingHistoryAndDownloads",  true);
 // user_pref("privacy.clearHistory.cache",                        true);
 // user_pref("privacy.clearHistory.cookiesAndStorage",           false);

@@ -40,9 +40,13 @@ user_pref("security.ssl.errorReporting.enabled",             false);
 	{{- comment(3, "Default 3 since 78") -}}
 // user_pref("security.tls.version.max",                            4);
 user_pref("security.tls.version.enable-deprecated",          false);
+	{{- comment(3, "(Default) Enforce") -}}
 %%  endif
 %%  if 53 <= ver
 user_pref("security.tls.enable_0rtt_data",                   false);
+%%  endif
+%%  if 88 <= ver
+user_pref("network.http.http3.enable_0rtt",                  false);
 %%  endif
 
 {{- comment(2, "OCSP (Online Certificate Status Protocol)") -}}
@@ -52,7 +56,9 @@ user_pref("security.ssl.enable_ocsp_stapling",    true);
 %%  endif
 %%  if true
 user_pref("security.OCSP.enabled",                   1);
-user_pref("security.OCSP.require",                true);
+	{{- comment(3, "Default 1 since at least 153") -}}
+// user_pref("security.OCSP.require",                true);
+	{{- comment(3, "Disabled for CRLite") -}}
 %%  endif
 
 {{- comment(2, "PKI") -}}
@@ -78,7 +84,7 @@ user_pref("security.nocertdb",                    true);
 
 %%  if 73 <= ver
 user_pref("security.pki.crlite_mode",                           2);
-%%  	if 3<= doc
+%%  	if 3 <= doc
 	// 0: Disable CRLite entirely.
 	// 1: Consult CRLite but only collect telemetry.
 	// 2: Consult CRLite and enforce both "Revoked" and "Not Revoked" results.
@@ -104,7 +110,7 @@ user_pref("security.ssl3.dhe_rsa_aes_256_sha",         false);
 user_pref("security.ssl3.ecdhe_ecdsa_aes_128_sha",     false);
 	{{- comment(3, "(Default false since 109 or 151?)") -}}
 // user_pref("security.ssl3.ecdhe_ecdsa_aes_256_sha",     false);
-//	{{- comment(3, "(Default false since 109)") -}}
+	{{- comment(3, "(Default false since 109)") -}}
 user_pref("security.ssl3.ecdhe_rsa_aes_128_sha",       false);
 // user_pref("security.ssl3.ecdhe_rsa_aes_256_sha",       false);
 user_pref("security.ssl3.rsa_aes_128_gcm_sha256",      false);
@@ -120,22 +126,25 @@ user_pref("security.tls.unrestricted_rc4_fallback",    false);
 
 %%  if app == 'firefox'
 %%  	if ver < 113
-user_pref("browser.ssl_override_behavior",                        1);
+user_pref("browser.ssl_override_behavior",                               1);
 %%  	endif
 %%  endif
 %%  if true
-user_pref("browser.xul.error_pages.expert_bad_cert",           true);
+user_pref("browser.xul.error_pages.expert_bad_cert",                  true);
 %%  endif
 %%  if app == 'firefox'
 %%  	if 59 <= ver and ver < 119
-user_pref("security.insecure_connection_icon.enabled",         true);
-user_pref("security.insecure_connection_icon.pbmode.enabled",  true);
+user_pref("security.insecure_connection_icon.enabled",                true);
+user_pref("security.insecure_connection_icon.pbmode.enabled",         true);
 %%  	endif
 %%  	if 60 <= ver
-user_pref("security.insecure_connection_text.enabled",         true);
+user_pref("security.insecure_connection_text.enabled",                true);
 	{{- comment(3, "(Default true since 136)") -}}
-user_pref("security.insecure_connection_text.pbmode.enabled",  true);
+user_pref("security.insecure_connection_text.pbmode.enabled",         true);
 	{{- comment(3, "(Default true since 136)") -}}
+%%  	endif
+%%  	if 55 <= ver
+user_pref("security.insecure_field_warning.ignore_local_ip_address", false);
 %%  	endif
 %%  endif
 

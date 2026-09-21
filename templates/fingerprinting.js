@@ -57,16 +57,16 @@ user_pref("privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts",   
 user_pref("privacy.resistFingerprinting.reduceTimerPrecision.microseconds",    100000);
 %%  	endif
 %%  	if true
-// user_pref("privacy.resistFingerprinting.letterboxing",                        true);
+// user_pref("privacy.resistFingerprinting.letterboxing",                           true);
 	{{- comment(3, "(Hidden)") -}}
-// user_pref("privacy.resistFingerprinting.letterboxing.dimensions",               "");
+// user_pref("privacy.resistFingerprinting.letterboxing.dimensions",                  "");
 	{{- comment(3, "(Hidden)") -}}
 %%  	endif
 %%  	if ver < 114
-// user_pref("privacy.resistFingerprinting.testGranularityMask",                    5);
+// user_pref("privacy.resistFingerprinting.testGranularityMask",                       5);
 %%  	endif
 %%  	if true
-// user_pref("privacy.resistFingerprinting.exemptedDomains",          "searchfox.org");
+// user_pref("privacy.resistFingerprinting.exemptedDomains",             "searchfox.org");
 %%  	endif
 %%  	if 59 <= ver
 user_pref("privacy.spoof_english",                                                  2);
@@ -152,22 +152,22 @@ user_pref("javascript.use_us_english_locale",          true);
 {{- comment(2, "Fingerprinting: FPP") -}}
 
 %%  	if 139 <= ver
-user_pref("privacy.baselineFingerprintingProtection",                     true);
+user_pref("privacy.baselineFingerprintingProtection",                    true);
 {{- comment(3, "(Default)") -}}
 // user_pref("privacy.baselineFingerprintingProtection.granularOverrides",    "");
 // user_pref("privacy.baselineFingerprintingProtection.overrides",            "");
 %%  	endif
 %%  	if 114 <= ver
-user_pref("privacy.fingerprintingProtection",                             true);
+user_pref("privacy.fingerprintingProtection",                            true);
 %%  	endif
 %%  	if 120 <= ver
-// user_pref("privacy.fingerprintingProtection.granularOverrides",          "");
+// user_pref("privacy.fingerprintingProtection.granularOverrides",            "");
 %%  	endif
 %%  	if true
-// user_pref("privacy.fingerprintingProtection.overrides",                  "");
-// user_pref("privacy.fingerprintingProtection.pbmode",                  false);
+// user_pref("privacy.fingerprintingProtection.overrides",                    "");
+// user_pref("privacy.fingerprintingProtection.pbmode",                    false);
 %%  	endif
 %%  	if 128 <= ver
-// user_pref("privacy.fingerprintingProtection.remoteOverrides.enabled"; false);
+// user_pref("privacy.fingerprintingProtection.remoteOverrides.enabled",   false);
 %%  	endif
 %%  endif

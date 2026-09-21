@@ -19,11 +19,11 @@
 %%  	if ver < 74
 user_pref("geo.wifi.logging.enabled",             true);
 	{{- comment(3, "(Hidden)") -}}
-user_pref("geo.wifi.uri", "https://api.beacondb.net/v1/geolocate");
+user_pref("geo.wifi.uri",                        "https://api.beacondb.net/v1/geolocate");
 %%  	else
 user_pref("geo.provider.network.logging.enabled", true);
 	{{- comment(3, "(Hidden)") -}}
-user_pref("geo.provider.network.url", "https://api.beacondb.net/v1/geolocate");
+user_pref("geo.provider.network.url",            "https://api.beacondb.net/v1/geolocate");
 %%  	endif
 %%  	if true
 user_pref("geo.provider.ms-windows-location",    false);

@@ -11,9 +11,9 @@
 {{- comment(1, "Extensions") -}}
 
 %%  if 115 <= ver
-// user_pref("extensions.quarantinedDomains.enabled",               true);
+// user_pref("extensions.quarantinedDomains.enabled",                  true);
 	{{- comment(3, "(Default)") -}}
-// user_pref("extensions.quarantinedDomains.list",                    "");
+// user_pref("extensions.quarantinedDomains.list",                       "");
 %%  endif
 %%  if 153 <= ver
 // user_pref("extensions.webextensions.fileSchemeAccess.requireOptIn", true);
@@ -54,7 +54,7 @@ user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 
 %%  if true
 user_pref("extensions.autoDisableScopes", 14);
-// user_pref("extensions.enabledScopes",   5);
+// user_pref("extensions.enabledScopes",      5);
 	{{- comment(3, "(Hidden)") -}}
 user_pref("extensions.startupScanScopes",  3);
 %%  endif

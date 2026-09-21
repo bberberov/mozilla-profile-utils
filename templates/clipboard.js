@@ -15,9 +15,16 @@ user_pref("clipboard.autocopy",               false);
 %%  endif
 %%  if 136 <= ver
 // user_pref("clipboard.copy_image.as_png",       true);
-	{{- comment(3, "MZ: On Windows, whether to add PNG before BMP (CF_DIB) in the list of supported formats when copying an image to the clipboard.") -}}
+%%  	if 3 <= doc
+	// MZ: On Windows, whether to add PNG before BMP (CF_DIB) in the list of supported formats
+	// when copying an image to the clipboard.
+%%  	endif
 // user_pref("clipboard.copy_image_file.as_png",  true);
-	{{- comment(3, "MZ: On Windows, whether we encode an image as PNG (instead of the previous default of BMP) when an application to which we are copying an image requests that it be provided as a temporary file (CF_HDROP). ") -}}
+%%  	if 3 <= doc
+	// MZ: On Windows, whether we encode an image as PNG (instead of the previous default of BMP)
+	// when an application to which we are copying an image
+	// requests that it be provided as a temporary file (CF_HDROP).
+%%  	endif
 %%  endif
 %%  if ver < 108
 user_pref("clipboard.plainTextOnly",           true);
@@ -38,10 +45,10 @@ user_pref("dom.events.asyncClipboard",                 {{ not_bool(hard) }});
 %%  	endif
 %%  endif
 %%  if 87 <= ver and ver < 147
+{#- Supposed to be < 102, but extending to cover until rename below -#}
 user_pref("dom.events.asyncClipboard.clipboardItem",   false);
 	{{- comment(3, "(Default) Enforce") -}}
 %%  endif
-{#- Supposed to be < 102, but extending to cover until rename below -#}
 %%  if 90 <= ver and ver <= 102
 user_pref("dom.events.asyncClipboard.read",            false);
 	{{- comment(3, "(Default) Enforce") -}}

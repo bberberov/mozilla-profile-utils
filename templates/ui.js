@@ -28,20 +28,31 @@ user_pref("general.warnOnAboutConfig",       {{ use_bool(warn) }});
 
 %%  endif
 
+{{- comment(2, "Profile Reset") -}}
+
+%%  if true
+user_pref("browser.disableResetPrompt",  true);
+##- TODO: introduced sometime after version 60
+%%  endif
+
 {{- comment(2, "Widgets") -}}
 
 %%  if app == 'firefox'
-{#- 	Thunderbird does now work well at 1.0 -#}
+
 %%  	if true
 user_pref("layout.css.devPixelsPerPx",        "1.0");
+##- Thunderbird does now work well at 1.0
 %%  	endif
 %%  	if 103 <= ver
 user_pref("browser.display.os-zoom-behavior",     0);
 user_pref("ui.textScaleFactor",                 100);
 	{{- comment(3, "(Hidden)") -}}
 %%  	endif
+
 %%  endif
+
 %%  if 88 <= ver
+##
 %%  	if ver < 127
 user_pref("widget.non-native-theme.enabled",           true);
 	{{- comment(3, "(Default true since 89)") -}}
@@ -98,11 +109,6 @@ user_pref("browser.tabs.closeWindowWithLastTab",       false);
 user_pref("mail.tabs.closeWindowWithLastTab",          false);
 %%  endif
 
-%%  if 132 <= ver
-// user_pref("browser.tabs.groups.enabled",                true);
-	{{- comment(3, "(Default true since 139)") -}}
-%%  endif
-
 %%  if   app == 'firefox'
 
 %%  	if 95 <= ver
@@ -124,16 +130,12 @@ user_pref("mail.tabs.drawInTitlebar",                   true);
 
 %%  if   app == 'firefox'
 user_pref("browser.tabs.tabClipWidth",                   384);
-%%  elif app == 'thunderbird'
-user_pref("mail.tabs.tabClipWidth",                      384);
-%%  endif
-%%  if   app == 'firefox'
+// user_pref("browser.tabs.tabMaxWidth",                    240);
 user_pref("browser.tabs.tabMinWidth",                    192);
 %%  elif app == 'thunderbird'
-user_pref("mail.tabs.tabMinWidth",                       192);
-%%  endif
-%%  if app == 'thunderbird'
+user_pref("mail.tabs.tabClipWidth",                      384);
 user_pref("mail.tabs.tabMaxWidth",                       240);
+user_pref("mail.tabs.tabMinWidth",                       192);
 %%  endif
 
 %%  if app == 'firefox'
@@ -148,52 +150,41 @@ user_pref("browser.tabs.tooltipsShowPidAndActiveness", {{ use_bool(debug) }});
 %%  	endif
 %%  endif
 
-{{- comment(2, "Tabs - Drag and Drop") -}}
+%%  if 132 <= ver
 
-%%  if 138 <= ver
+{{- comment(2, "Tabs - Groups") -}}
+
+%%  	if 138 <= ver
 // user_pref("browser.tabs.dragDrop.createGroup.delayMS",        240);
-%%  endif
-%%  if 150 <= ver
+%%  	endif
+%%  	if 150 <= ver
 // user_perf("browser.tabs.dragDrop.createGroup.enabled",       true);
-%%  endif
-%%  if 138 <= ver
+%%  	endif
+%%  	if 138 <= ver
 // user_pref("browser.tabs.dragDrop.expandGroup.delayMS",        350);
 // user_pref("browser.tabs.dragDrop.moveOverThresholdPercent",    80);
-%%  endif
-%%  if 146 <= ver
+%%  	endif
+%%  	if 146 <= ver
 // user_pref("browser.tabs.dragDrop.multiselectStacking",      false);
-%%  endif
-%%  if 138 <= ver
+%%  	endif
+%%  	if 138 <= ver
 // user_pref("browser.tabs.dragDrop.selectTab.delayMS",          350);
-%%  endif
-
-{{- comment(2, "Tabs - Other") -}}
-
-%%  if 150 <= ver
-// user_perf("browser.tabs.groups.alternateMenu", false);
-%%  endif
-%%  if 146 <= ver
-// user_pref("browser.tabs.notes.enabled",        false);
-// user_pref("browser.tabs.splitView.enabled",    false);
-%%  endif
-
-%%  if app == 'firefox'
-
-{{- comment(2, "New Tab") -}}
-
+%%  	endif
 %%  	if true
-user_pref("browser.newtab.preload",         false);
-// user_pref("browser.newtab.url",     "about:blank");
+// user_pref("browser.tabs.groups.enabled",                     true);
+{{- comment(3, "(Default true since 139)") -}}
+%%  	endif
+%%  	if 150 <= ver
+// user_perf("browser.tabs.groups.alternateMenu",              false);
 %%  	endif
 
 %%  endif
 
-{{- comment(2, "New Tab Page") -}}
+{{- comment(2, "Tabs - Other") -}}
 
-%%  if   app == 'firefox'
-user_pref("browser.newtabpage.enabled", false);
-%%  elif app == 'thunderbird'
-// user_pref("browser.newtabpage.enabled", false);
+%%  if 146 <= ver
+// user_pref("browser.tabs.notes.enabled",        false);
+// user_pref("browser.tabs.splitView.enabled",    false);
 %%  endif
 
 {#-
@@ -213,69 +204,6 @@ user_pref("browser.urlbar.openintab",                true);
 // user_pref("browser.tabs.insertAfterCurrent",         true);
 // user_pref("browser.tabs.insertRelatedAfterCurrent",  true);
 	{{- comment(3, "(Default)") -}}
-%%  	endif
-
-{{- comment(2, "New Tab Page, Activity Stream") -}}
-
-%%  	if 57 <= ver and ver < 87
-user_pref("browser.library.activity-stream.enabled",                                               false);
-%%  	endif
-%%  	if 54 <= ver and ver < 60
-user_pref("browser.newtabpage.activity-stream.enabled",                                            false);
-%%  	endif
-%%  	if ver < 122
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets",                         "{}");
-%%  	endif
-%%  	if 67 <= ver
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons",                      false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features",                    false);
-%%  	endif
-%%  	if 66 <= ver
-user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed",                          false);
-%%  	endif
-%%  	if 57 <= ver
-// user_pref("browser.newtabpage.activity-stream.feeds.newtabinit",                                   false);
-// user_pref("browser.newtabpage.activity-stream.feeds.places",                                       false);
-// user_pref("browser.newtabpage.activity-stream.feeds.section",                                      false);
-// user_pref("browser.newtabpage.activity-stream.feeds.section.highlights",                           false);
-user_pref("browser.newtabpage.activity-stream.feeds.section.topstories",                           false);
-%%  	endif
-%%  	if ver < 122
-user_pref("browser.newtabpage.activity-stream.feeds.snippets",                                     false);
-%%  	endif
-%%  	if 57 <= ver
-// user_pref("browser.newtabpage.activity-stream.feeds.system.topsites",                              false);
-// user_pref("browser.newtabpage.activity-stream.feeds.system.topstories",                            false);
-// user_pref("browser.newtabpage.activity-stream.feeds.systemtick",                                   false);
-// user_pref("browser.newtabpage.activity-stream.feeds.topsites",                                     false);
-user_pref("browser.newtabpage.activity-stream.default.sites",                                         "");
-// user_pref("browser.newtabpage.activity-stream.showSearch",                                         false);
-%%  	endif
-%%  	if 58 <= ver
-user_pref("browser.newtabpage.activity-stream.showSponsored",                                      false);
-%%  	endif
-%%  	if 140 <= ver
-user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes",                            false);
-%%  	endif
-%%  	if 83 <= ver
-user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites",                              false);
-%%  	endif
-%%  	if 60 <= ver and ver < 141
-user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket",                   false);
-			{{- comment(3, "Pocket is deprecated") -}}
-%%  	endif
-%%  	if 61 <= ver
-// user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks",                false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads",                false);
-// user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited",                  false);
-%%  	endif
-%%  	if 57 <= ver
-user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts",               false);
-// user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines",    "");
-%%  	endif
-%%  	if ver < 60
-user_pref("browser.newtabpage.enhanced",                                                           false);
-user_pref("browser.newtabpage.introShown",                                                         {{ use_bool(warn) }});
 %%  	endif
 
 {{- comment(2, "Windows jumplist") -}}
@@ -349,6 +277,7 @@ user_pref("browser.toolbars.bookmarks.visibility",         "always");
 // user_pref("sidebar.verticalTabs",                           false);
 // user_pref("sidebar.visibility",                             "always-show");
 %%  		endif
+
 %%  	endif
 
 %%  endif

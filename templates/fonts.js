@@ -10,9 +10,9 @@
 
 {{- comment(1, "Fonts") -}}
 
-// user_pref("font.name.serif.x-unicode", "Georgia");
-// user_pref("font.name.serif.x-western", "Georgia");
+// user_pref("font.name.serif.x-unicode",      "Georgia");
+// user_pref("font.name.serif.x-western",      "Georgia");
 // user_pref("font.name.sans-serif.x-unicode", "Arial");
 // user_pref("font.name.sans-serif.x-western", "Arial");
-// user_pref("font.name.monospace.x-unicode", "Lucida Console");
-// user_pref("font.name.monospace.x-western", "Lucida Console");
+// user_pref("font.name.monospace.x-unicode",  "Lucida Console");
+// user_pref("font.name.monospace.x-western",  "Lucida Console");

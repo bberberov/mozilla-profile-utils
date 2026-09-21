@@ -100,7 +100,7 @@ user_pref("network.dns.blockDotOnion", true);
 user_pref("network.dns.disableIPv6",   true);
 %%  endif
 %%  if 60 <= ver
-// user_pref("network.trr.mode",          5);
+// user_pref("network.trr.mode",             5);
 user_pref("doh-rollout.home-region",   "CA");
 	{{- comment(3, "(Hidden)") -}}
 %%  endif
@@ -131,6 +131,7 @@ user_pref("browser.tabs.remote.separateFileUriProcess",  true);
 %%  	endif
 %%  	if 144 <= ver
 // user_pref("network.lna.allow_top_level_navigation",              true);
+	{{- comment(3, "MZ: When this pref is true, top-level document navigation to local network addresses will bypass LNA permission checks.") -}}
 %%  	endif
 %%  	if 146 <= ver
 // user_pref("network.lna.benchmarking-is-local",                  false);
@@ -138,15 +139,23 @@ user_pref("browser.tabs.remote.separateFileUriProcess",  true);
 %%  	if 141 <= ver
 // user_pref("network.lna.block_trackers",                         false);
 // user_pref("network.lna.blocking",                               false);
-// user_pref("network.lna.enabled",                                 true);
+user_pref("network.lna.enabled",                                 true);
 	{{- comment(3, "(Default true since 153)") -}}
 %%  	endif
 %%  	if 146 <= ver
 // user_pref("network.lna.etp.enabled",                            false);
 	{{- comment(3, "(Default true since 149)") -}}
-// user_pref("network.lna.local-network-to-localhost.skip-checks",  true);
+user_pref("network.lna.local-network-to-localhost.skip-checks", false);
 // user_pref("network.lna.skip-domains",                              "");
-// user_pref("network.lna.websocket.enabled",                      false);
+%%  		if 3 <= doc
+	// MZ: Comma-separated list of domains to skip LNA checks for.
+	// Supports suffix wildcard patterns (*.example.com)
+%%  		endif
+user_pref("network.lna.websocket.enabled",                       true);
+%%  		if 3 <= doc
+	// MZ: When this pref is false, skip all LNA checks for WebSocket connections.
+	// When true, WebSocket connections follow normal LNA rules.
+%%  		endif
 %%  	endif
 %%  endif
 

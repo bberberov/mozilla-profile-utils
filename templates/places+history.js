@@ -19,7 +19,7 @@
 %%  if app == 'firefox'
 
 %%  	if true
-user_pref("browser.bookmarks.max_backups",            {{ use_vals(public, 7, 2) }});
+user_pref("browser.bookmarks.max_backups",     {{ use_vals(public, 7, 2) }});
 %%  	endif
 %%  	if 84 <= ver
 user_pref("browser.bookmarks.defaultLocation", {{ use_vals(public, '"unfiled"', '"toolbar"') }});
@@ -165,7 +165,7 @@ user_pref("places.frecency.unvisitedTypedBonus",     200);
 
 {{- comment(2, "Frecency - Alternative") -}}
 
-##  		if ver < 147
+##-  		if ver < 147
 // user_perf("places.frecency.pages.alternative.interactions.manyKeypresses",                   50);
 // user_perf("places.frecency.pages.alternative.interactions.maxVisitGapSeconds",              120);
 // user_perf("places.frecency.pages.alternative.interactions.viewTimeIfManyKeypressesSeconds",  20);
@@ -187,9 +187,11 @@ user_pref("places.frecency.unvisitedTypedBonus",     200);
 // user_perf("places.frecency.pages.veryHighWeight",                               200);
 // user_pref("places.frecency.pages.halfLifeDays",                                  30);
 // user_pref("places.frecency.pages.highWeight",                                   100);
-##  		endif
+##-  		endif
 %%  	endif
+
 %%  endif
+{#- app == 'firefox' -#}
 
 {{- comment(2, "CSS history leak") -}}
 

@@ -39,6 +39,12 @@ user_pref("extensions.ml.enabled",            false);
 // user_pref("browser.ml.chat.enabled",           true);
 	{{- comment(3, "(Default true since 136)") -}}
 %%  	endif
+%%  	if 129 <= ver
+user_pref("browser.ml.chat.hideLocalhost",    false);
+%%  	endif
+%%  	if 142 <= ver
+// user_pref("browser.ml.chat.maxLength",         7000);
+%%  	endif
 %%  	if 141 <= ver
 // user_pref("browser.ml.chat.menu",              true);
 // user_pref("browser.ml.chat.page",             false);
@@ -46,8 +52,14 @@ user_pref("extensions.ml.enabled",            false);
 // user_pref("browser.ml.chat.page.footerBadge",  true);
 // user_pref("browser.ml.chat.page.menuBadge",    true);
 %%  	endif
-%%  	if 142 <= ver
-// user_pref("browser.ml.chat.maxLength",         7000);
+%%  	if 128 <= ver
+// user_pref("browser.ml.chat.provider",            "");
+	{{- comment(3, "Empty by default") -}}
+// user_pref("browser.ml.chat.providers",           "");
+	{{- comment(3, "(Hidden)") -}}
+%%  	endif
+%%  	if 129 <= ver
+// user_pref("browser.ml.chat.sidebar",           true);
 %%  	endif
 
 {{- comment(2, "Link Preview") -}}
@@ -57,31 +69,31 @@ user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
 	{{- comment(3, "UI control for browser.ml.linkPreview.enabled") -}}
 %%  	endif
 %%  	if 138 <= ver
-// user_pref("browser.ml.linkPreview.allowedLanguages",  "en");
-// user_pref("browser.ml.linkPreview.blockListEnabled",  true);
+// user_pref("browser.ml.linkPreview.allowedLanguages",      "en");
+// user_pref("browser.ml.linkPreview.blockListEnabled",      true);
 %%  	endif
 %%  	if 140 <= ver
-// user_pref("browser.ml.linkPreview.collapsed",        false);
+// user_pref("browser.ml.linkPreview.collapsed",            false);
 %%  	endif
 %%  	if 138 <= ver
-user_pref("browser.ml.linkPreview.enabled",          false);
+user_pref("browser.ml.linkPreview.enabled",              false);
 	{{- comment(3, "(Default true since 146)") -}}
 %%  	endif
 %%  	if 140 <= ver
-// user_pref("browser.ml.linkPreview.ignoreMs",          2000);
+// user_pref("browser.ml.linkPreview.ignoreMs",              2000);
 %%  	endif
 %%  	if 140 <= ver
-// user_pref("browser.ml.linkPreview.longPress",         true);
-// user_pref("browser.ml.linkPreview.longPressMs",       1000);
-// user_pref("browser.ml.linkPreview.optin",            false);
+// user_pref("browser.ml.linkPreview.longPress",             true);
+// user_pref("browser.ml.linkPreview.longPressMs",           1000);
+// user_pref("browser.ml.linkPreview.optin",                false);
 %%  	endif
 %%  	if 138 <= ver
-// user_pref("browser.ml.linkPreview.outputSentences",      3);
+// user_pref("browser.ml.linkPreview.outputSentences",          3);
 %%  	endif
 %%  	if 140 <= ver
-// user_pref("browser.ml.linkPreview.recentTypingMs",    1000);
-// user_pref("browser.ml.linkPreview.shift",             true);
-// user_pref("browser.ml.linkPreview.shiftAlt",         false);
+// user_pref("browser.ml.linkPreview.recentTypingMs",        1000);
+// user_pref("browser.ml.linkPreview.shift",                 true);
+// user_pref("browser.ml.linkPreview.shiftAlt",             false);
 %%  	endif
 
 {{- comment(2, "PDFjs Suggestions") -}}

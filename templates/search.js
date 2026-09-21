@@ -11,26 +11,29 @@
 {{- comment(1, "Search") -}}
 
 %%  if ver < 119
-user_pref("browser.fixup.alternate.enabled",        false);
+user_pref("browser.fixup.alternate.enabled",                         false);
 %%  endif
 %%  if ver < 65
-user_pref("browser.fixup.hide_user_pass",            true);
+user_pref("browser.fixup.hide_user_pass",                             true);
 %%  endif
 %%  if ver < 63
-user_pref("browser.search.countryCode",              "US");
+user_pref("browser.search.countryCode",                               "US");
 	{{- comment(3, "(Hidden)") -}}
 %%  endif
 %%  if ver < 82
-user_pref("browser.search.geoSpecificDefaults",     false);
+user_pref("browser.search.geoSpecificDefaults",                      false);
+%%  endif
+%%  if 119 <= ver
+user_pref("browser.search.serpEventTelemetryCategorization.enabled", false);
 %%  endif
 %%  if true
-user_pref("browser.search.suggest.enabled",         false);
+user_pref("browser.search.suggest.enabled",                          false);
 %%  endif
 %%  if 71 <= ver
-user_pref("browser.search.suggest.enabled.private", false);
+user_pref("browser.search.suggest.enabled.private",                  false);
 %%  endif
 %%  if app == 'firefox'
-user_pref("keyword.enabled",                         true);
+user_pref("keyword.enabled",                                          true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 
@@ -74,6 +77,9 @@ user_pref("browser.urlbar.suggest.pocket",                    false);
 %%  	endif
 %%  	if 87 <= ver and ver < 95
 user_pref("browser.urlbar.suggest.quicksuggest",              false);
+%%  	endif
+%%  	if 146 <= ver
+// user_pref("browser.urlbar.suggest.quicksuggest.all",          false);
 %%  	endif
 %%  	if 95 <= ver
 user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);

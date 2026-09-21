@@ -16,9 +16,9 @@
 
 %%  	if 51 <= ver
 %%  		if ver < 85
-user_pref("privacy.firstparty.isolate",                            true);
+user_pref("privacy.firstparty.isolate",                         true);
 %%  		else
-user_pref("privacy.firstparty.isolate",                           false);
+user_pref("privacy.firstparty.isolate",                        false);
 %%  		endif
 %%  	endif
 %%  	if 54 <= ver

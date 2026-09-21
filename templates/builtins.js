@@ -64,7 +64,6 @@ user_pref("extensions.pocket.enabled", false);
 
 %%  		if 140 <= ver
 user_pref("browser.screenshots.folderList",  3);
-// user_pref("browser.screenshots.dir",        "");
 %%  			if 3 <= doc
 	// MZ: Determines the default save location for screenshots
 	// Valid values are 0, 1, 2, 3 and 4.
@@ -75,6 +74,7 @@ user_pref("browser.screenshots.folderList",  3);
 	//   4 - Use browser.download.folderList
 	// Options 2 and 3 will fallback to the system downloads folder if their specified folder is not found.
 %%  			endif
+// user_pref("browser.screenshots.dir",        "");
 %%  		endif
 %%  		if 60 <= ver
 %%  			if ver < 140
@@ -87,6 +87,14 @@ user_pref("extensions.screenshots.upload-disabled",  true);
 %%  		else
 user_pref("extensions.screenshots.disabled", true);
 %%  		endif
+%%  	endif
+
+%%  	if 141 <= ver
+
+{{- comment(2, "VPN") -}}
+
+user_pref("browser.ipProtection.enabled", false);
+	{{- comment(3, "(Default)") -}}
 %%  	endif
 
 %%  elif app == 'thunderbird'

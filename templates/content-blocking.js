@@ -111,37 +111,56 @@ user_pref("browser.safebrowsing.phishing.enabled",         false);
 {{- comment(2, "Tracking Protection") -}}
 
 %%  if 93 <= ver
-user_pref("privacy.antitracking.enableWebcompat",                          {{ not_bool(public) }});
+user_pref("privacy.antitracking.enableWebcompat",                           {{ not_bool(public) }});
 %%  endif
 %%  if 139 <= ver
-user_pref("privacy.antitracking.isolateContentScriptResources",             true);
+user_pref("privacy.antitracking.isolateContentScriptResources",              true);
+%%  endif
+%%  if 141 <= ver
+user_pref("privacy.trackingprotection.allow_list.baseline.enabled",         false);
+user_pref("privacy.trackingprotection.allow_list.convenience.enabled",      false);
+user_pref("privacy.trackingprotection.allow_list.hasMigratedCategoryPrefs",  true);
 %%  endif
 %%  if true
-user_pref("privacy.trackingprotection.enabled",                             true);
+user_pref("privacy.trackingprotection.enabled",                              true);
 	{{- comment(3, "(Default)") -}}
-user_pref("privacy.trackingprotection.pbmode.enabled",                      true);
+user_pref("privacy.trackingprotection.pbmode.enabled",                       true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 %%  if 66 <= ver
-user_pref("privacy.trackingprotection.cryptomining.enabled",                true);
-	{{- comment(3, "(Default)") -}}
-user_pref("privacy.trackingprotection.fingerprinting.enabled",              true);
+user_pref("privacy.trackingprotection.cryptomining.enabled",                 true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 %%  if 67 <= ver and app == 'firefox'
-user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled",    true);
+user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled",     true);
 	{{- comment(3, "(Default)") -}}
-user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled",  true);
+%%  endif
+%%  if 104 <= ver
+// user_pref("privacy.trackingprotection.emailtracking.enabled",                true);
+%%  endif
+%%  if 112 <= ver
+// user_pref("privacy.trackingprotection.emailtracking.pbmode.enabled",         true);
 	{{- comment(3, "(Default)") -}}
+%%  endif
+%%  if 66 <= ver
+user_pref("privacy.trackingprotection.fingerprinting.enabled",               true);
+	{{- comment(3, "(Default)") -}}
+%%  endif
+%%  if 67 <= ver and app == 'firefox'
+user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled",   true);
+	{{- comment(3, "(Default)") -}}
+%%  endif
+%%  if 147 <= ver
+// user_pref("privacy.trackingprotection.harmfuladdon.enabled",                 true);
 %%  endif
 %%  if 69 <= ver
-user_pref("privacy.trackingprotection.socialtracking.enabled",              true);
+user_pref("privacy.trackingprotection.socialtracking.enabled",               true);
 %%  endif
 %%  if 70 <= ver and ver < 141 and app == 'firefox'
-user_pref("browser.contentblocking.customBlockList.preferences.ui.enabled", true);
+user_pref("browser.contentblocking.customBlockList.preferences.ui.enabled",  true);
 %%  endif
 %%  if ver < 63 and app == 'firefox'
-user_pref("privacy.trackingprotection.ui.enabled",                          true);
+user_pref("privacy.trackingprotection.ui.enabled",                           true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 

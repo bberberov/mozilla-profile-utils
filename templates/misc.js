@@ -82,7 +82,13 @@ user_pref("browser.shell.shortcutFavicons",           false);
 %%  	endif
 %%  	if config_homepage is not defined
 user_pref("browser.startup.page",                         0);
+##- NOTE: user_pref("browser.newtab.url", "about:blank"); if before version 60
+##- TODO: find out when chrome://browser/content/blanktab.html was introduced
+%%  		if ver < 115
 user_pref("browser.startup.homepage",                     "about:blank");
+%%  		else
+user_pref("browser.startup.homepage",                     "chrome://browser/content/blanktab.html");
+%%  		endif
 %%  	else
 user_pref("browser.startup.page",                         1);
 user_pref("browser.startup.homepage",                     "{{ config_homepage | join( '|' ) }}");
@@ -99,5 +105,10 @@ user_pref("browser.startup.homepage_override.mstone",     "ignore");
 %%  endif
 
 %%  if 95 <= ver
-// user_pref("privacy.globalprivacycontrol.enabled",                        true);
+##
+// user_pref("privacy.globalprivacycontrol.enabled",                true);
+// user_pref("privacy.globalprivacycontrol.functionality.enabled",  true);
+	{{- comment(3, "(Default true since 120)") -}}
+// user_pref("privacy.globalprivacycontrol.pbmode.enabled",         true);
+##- TODO: unknown introduction
 %%  endif

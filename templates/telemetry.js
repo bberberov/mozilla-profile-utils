@@ -105,11 +105,16 @@ user_pref("datareporting.healthreport.uploadEnabled",   false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 %%  endif
 
+%%  if 136 <= ver
+user_pref("datareporting.usage.uploadEnabled",           true);
+	{{- comment(3, "Daily usage ping") -}}
+%%  endif
+
 %%  if app == 'firefox'
 
-{{- comment(2, "Telemetry - Activity Stream") -}}
+{{- comment(2, "Telemetry - New Tab / Activity Stream") -}}
 
-%%  	if true
+%%  	if 57 <= ver
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry",       false);
 %%  	endif

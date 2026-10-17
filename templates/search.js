@@ -32,12 +32,12 @@ user_pref("browser.search.suggest.enabled",                          false);
 %%  if 71 <= ver
 user_pref("browser.search.suggest.enabled.private",                  false);
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("keyword.enabled",                                          true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "URLbar: Suggestions") -}}
 
@@ -191,4 +191,4 @@ user_pref("browser.urlbar.update2.oneOffsRefresh",           false);
 %%  	endif
 
 %%  endif
-{#- app == 'firefox' -#}
+{#- 'firefox' == app -#}

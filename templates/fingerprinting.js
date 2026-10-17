@@ -16,7 +16,7 @@
 user_pref("browser.display.use_system_colors",               false);
 	{{- comment(3, "(Default false since 151)") -}}
 %%  endif
-%%  if app == 'firefox' and 60 <= ver
+%%  if 'firefox' == app and 60 <= ver
 user_pref("browser.startup.blankWindow",                     false);
 %%  endif
 %%  if 79 <= ver

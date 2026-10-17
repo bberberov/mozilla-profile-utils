@@ -16,7 +16,7 @@
 
 {{- comment(2, "Places - Bookmarks") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if true
 user_pref("browser.bookmarks.max_backups",     {{ use_vals(public, 7, 2) }});
@@ -25,7 +25,7 @@ user_pref("browser.bookmarks.max_backups",     {{ use_vals(public, 7, 2) }});
 user_pref("browser.bookmarks.defaultLocation", {{ use_vals(public, '"unfiled"', '"toolbar"') }});
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("browser.bookmarks.max_backups", 0);
@@ -35,20 +35,20 @@ user_pref("browser.bookmarks.max_backups", 0);
 
 {{- comment(2, "Places - Icons") -}}
 
-%%  if app == 'thunderbird'
+%%  if 'thunderbird' == app
 user_pref("browser.chrome.site_icons", false);
 %%  endif
 
 {{- comment(2, "Places - History") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if true
 user_pref("places.history.enabled",              {{ not_bool(session) }});
 user_pref("places.history.expiration.max_pages", 1048576);
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("places.history.enabled", false);
@@ -56,7 +56,7 @@ user_pref("places.history.enabled", false);
 
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Per-tab session history") -}}
 
@@ -65,7 +65,7 @@ user_pref("browser.sessionhistory.max_entries", 20);
 
 {{- comment(2, "Form Fill") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if true
 user_pref("browser.formfill.enable",         {{ not_bool(session) }});
@@ -78,7 +78,7 @@ user_pref("browser.formfill.saveHttpsForms", false);
 user_pref("extensions.formautofill.useml",   false);
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("browser.formfill.enable",         false);
@@ -108,7 +108,7 @@ user_pref("extensions.formautofill.heuristics.enabled",    false);
 %%  	endif
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Frecency") -}}
 
@@ -191,7 +191,7 @@ user_pref("places.frecency.unvisitedTypedBonus",     200);
 %%  	endif
 
 %%  endif
-{#- app == 'firefox' -#}
+{#- 'firefox' == app -#}
 
 {{- comment(2, "CSS history leak") -}}
 

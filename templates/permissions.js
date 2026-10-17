@@ -10,7 +10,7 @@
 
 {{- comment(1, "Permissions") -}}
 
-%%	if app == 'firefox'
+%%	if 'firefox' == app
 %%  	if 58 <= ver
 user_pref("permissions.default.camera",                   0);
 user_pref("permissions.default.desktop-notification",     0);
@@ -42,7 +42,7 @@ user_pref("permissions.delegation.enabled",           false);
 // user_pref("permissions.isolateBy.privateBrowsing",     true);
 // user_pref("permissions.isolateBy.userContext",        false);
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if 58 <= ver
 user_pref("permissions.memory_only",                  {{ or_bool(public, session) }});
 	{{-	comment(3, "(Hidden)") -}}

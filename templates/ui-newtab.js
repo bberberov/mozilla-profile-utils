@@ -10,19 +10,19 @@
 
 {{- comment(1, "New Tab Page") -}}
 
-%%  if   app == 'firefox'
+%%  if    'firefox' == app
 user_pref("browser.newtabpage.enabled",    false);
 user_pref("browser.newtab.preload",        false);
 %%  	if ver < 60
 user_pref("browser.newtabpage.enhanced",   false);
 user_pref("browser.newtabpage.introShown", {{ use_bool(warn) }});
 %%  	endif
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 // user_pref("browser.newtabpage.enabled",    false);
 // user_pref("browser.newtab.preload",        false);
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Activity Stream") -}}
 
@@ -128,4 +128,4 @@ user_pref("browser.newtabpage.activity-stream.system.showWeather", false);
 %%  	endif
 
 %%  endif
-{#- app == 'firefox' -#}
+{#- 'firefox' == app -#}

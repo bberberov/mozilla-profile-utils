@@ -14,50 +14,50 @@
 
 {{- comment(1, "Content Blocking") -}}
 
-%%  if 70 <= ver and app == 'firefox'
+%%  if 'firefox' == app and 70 <= ver
 user_pref("browser.contentblocking.category", "custom");
 %%  endif
 
 {{- comment(2, "Cookies ( Use extensions to manage)") -}}
 
 %%  if ver < 70
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 user_pref("network.cookie.cookieBehavior",                      1);
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 user_pref("network.cookie.cookieBehavior",                      {{ use_vals(config_OAuth, 1, 2) }});
 %%  	else
 user_pref("network.cookie.cookieBehavior",                      2);
 %%  	endif
 %%  elif 70 <= ver and ver < 78
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 user_pref("network.cookie.cookieBehavior",                      4);
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 user_pref("network.cookie.cookieBehavior",                      {{ use_vals(config_OAuth, 4, 2) }});
 %%  	else
 user_pref("network.cookie.cookieBehavior",                      2);
 %%  	endif
 %%  else
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 user_pref("network.cookie.cookieBehavior",                      5);
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 user_pref("network.cookie.cookieBehavior",                      {{ use_vals(config_OAuth, 5, 2) }});
 %%  	else
 user_pref("network.cookie.cookieBehavior",                      2);
 %%  	endif
 %%  endif
 %%  if 122 <= ver
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 // user_pref("network.cookie.cookieBehavior.optInPartitioning", true);
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 // user_pref("network.cookie.cookieBehavior.optInPartitioning", {{ use_vals(config_OAuth, true, false) }});
 %%  	else
 // user_pref("network.cookie.cookieBehavior.optInPartitioning", false);
 %%  	endif
 %%  endif
 %%  if 89 <= ver
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 user_pref("network.cookie.cookieBehavior.pbmode",               5);
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 user_pref("network.cookie.cookieBehavior.pbmode",               {{ use_vals(config_OAuth, 5, 2) }});
 %%  	else
 user_pref("network.cookie.cookieBehavior.pbmode",               2);
@@ -76,9 +76,9 @@ user_pref("network.cookie.cookieBehavior.pbmode",               2);
 user_pref("network.cookie.leave-secure-alone",               true);
 %%  endif
 %%  if ver < 104
-%%  	if   app == 'firefox'
+%%  	if   'firefox' == app
 user_pref("network.cookie.lifetimePolicy",                      {{ use_vals(session, 2, 0) }});
-%%  	elif app == 'thunderbird'
+%%  	elif 'thunderbird' == app
 user_pref("network.cookie.lifetimePolicy",                      {{ use_vals(config_OAuth, 0, 2) }});
 %%  	else
 user_pref("network.cookie.lifetimePolicy",                      {{ use_vals(session, 2, 0) }});
@@ -131,7 +131,7 @@ user_pref("privacy.trackingprotection.pbmode.enabled",                       tru
 user_pref("privacy.trackingprotection.cryptomining.enabled",                 true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
-%%  if 67 <= ver and app == 'firefox'
+%%  if 'firefox' == app and 67 <= ver
 user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled",     true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
@@ -146,7 +146,7 @@ user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled",     tru
 user_pref("privacy.trackingprotection.fingerprinting.enabled",               true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
-%%  if 67 <= ver and app == 'firefox'
+%%  if 'firefox' == app and 67 <= ver
 user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled",   true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
@@ -156,10 +156,10 @@ user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled",   tru
 %%  if 69 <= ver
 user_pref("privacy.trackingprotection.socialtracking.enabled",               true);
 %%  endif
-%%  if 70 <= ver and ver < 141 and app == 'firefox'
+%%  if 'firefox' == app and 70 <= ver and ver < 141
 user_pref("browser.contentblocking.customBlockList.preferences.ui.enabled",  true);
 %%  endif
-%%  if ver < 63 and app == 'firefox'
+%%  if 'firefox' == app and ver < 63
 user_pref("privacy.trackingprotection.ui.enabled",                           true);
 	{{- comment(3, "(Default)") -}}
 %%  endif

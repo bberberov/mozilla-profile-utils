@@ -21,7 +21,7 @@
 %%  if true
 user_pref("extensions.webextensions.restrictedDomains",               "");
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if 81 <= ver
 user_pref("extensions.webcompat.enable_shims",                      true);
 %%  	endif
@@ -59,7 +59,7 @@ user_pref("extensions.autoDisableScopes", 14);
 user_pref("extensions.startupScanScopes",  3);
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "3rd Party") -}}
 

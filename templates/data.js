@@ -19,9 +19,9 @@ user_pref("offline-apps.allow_by_default", false);
 
 {{- comment(2, "Sign Ons and AutoFill") -}}
 
-%%  if   app == 'firefox'
+%%  if   'firefox' == app
 user_pref("signon.rememberSignons",         false);
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 user_pref("signon.rememberSignons",          true);
 %%  endif
 %%  if true
@@ -39,7 +39,7 @@ user_pref("signon.formlessCapture.enabled", false);
 user_pref("privacy.clearOnShutdown.cache",         true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("privacy.clearOnShutdown.cookies",      {{ use_bool(session) }});
 user_pref("privacy.clearOnShutdown.downloads",    {{ use_bool(session) }});
 user_pref("privacy.clearOnShutdown.formdata",     {{ use_bool(session) }});
@@ -67,7 +67,7 @@ user_pref("privacy.clearOnShutdown_v2.siteSettings",                false);
 user_pref("privacy.sanitize.sanitizeOnShutdown",   true);
 %%  endif
 
-%%  if app == 'firefox' and 128 <= ver
+%%  if 'firefox' == app and 128 <= ver
 
 {{- comment(2, "Clear Site Data") -}}
 
@@ -85,7 +85,7 @@ user_pref("privacy.sanitize.sanitizeOnShutdown",   true);
 user_pref("privacy.cpd.cache",            true);
 	{{- comment(3, "(Default)") -}}
 %%  endif
-%%  if app == 'thunderbird'
+%%  if 'thunderbird' == app
 %%  	if config_OAuth is defined
 user_pref("privacy.cpd.cookies",         {{ not_bool(config_OAuth) }});
 %%  	else
@@ -94,14 +94,14 @@ user_pref("privacy.cpd.cookies",          true);
 %%  else
 user_pref("privacy.cpd.cookies",         {{ use_bool(session) }});
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("privacy.cpd.downloads",       {{ use_bool(session) }});
 user_pref("privacy.cpd.formdata",        {{ use_bool(session) }});
 %%  endif
 %%  if true
 user_pref("privacy.cpd.history",         {{ use_bool(session) }});
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("privacy.cpd.offlineApps",     {{ or_bool(public, session) }});
 // user_pref("privacy.cpd.openWindows",      true);
 user_pref("privacy.cpd.passwords",       false);

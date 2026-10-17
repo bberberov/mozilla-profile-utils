@@ -76,7 +76,7 @@ user_pref("security.pki.sha1_enforcement_level",     1);
 %%  if 50 <= ver and ver < 117
 user_pref("security.family_safety.mode",             0);
 %%  endif
-%%  if 41 <= ver and app == 'firefox' and ( public or session )
+%%  if 'firefox' == app and 41 <= ver and ( public or session )
 user_pref("security.nocertdb",                    true);
 %%  endif
 
@@ -124,7 +124,7 @@ user_pref("security.tls.unrestricted_rc4_fallback",    false);
 
 {{- comment(2, "TLS/SSL UI (User Interface)") -}}
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if ver < 113
 user_pref("browser.ssl_override_behavior",                               1);
 %%  	endif
@@ -132,7 +132,7 @@ user_pref("browser.ssl_override_behavior",                               1);
 %%  if true
 user_pref("browser.xul.error_pages.expert_bad_cert",                  true);
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if 59 <= ver and ver < 119
 user_pref("security.insecure_connection_icon.enabled",                true);
 user_pref("security.insecure_connection_icon.pbmode.enabled",         true);

@@ -62,7 +62,7 @@ user_pref("media.getusermedia.screensharing.enabled", false);
 
 {{- comment(2, "GMP (Gecko Media Plugins) WebRTC") -}}
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("media.gmp-provider.enabled",                   false);
 user_pref("media.gmp.trial-create.enabled",               false);
 %%  endif
@@ -74,7 +74,7 @@ user_pref("media.gmp-manager.updateEnabled",              false);
 	{{- comment(3, "(Hidden)") -}}
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "OpenH264 Video Codec by Cisco") -}}
 
@@ -105,7 +105,7 @@ user_pref("media.eme.apiVisible",   false);
 %%  if true
 user_pref("media.eme.enabled",      false);
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 user_pref("browser.eme.ui.enabled", false);
 %%  	if 55 <= ver and ver < 57
 user_pref("media.eme.chromium-api.enabled", false);

@@ -8,7 +8,7 @@
 
 %%  from 'tools.jinja' import comment with context
 
-%%  if app == 'thunderbird'
+%%  if 'thunderbird' == app
 
 {{- comment(1, "Thunderbird Mail") -}}
 

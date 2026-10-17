@@ -10,7 +10,7 @@
 
 {{- comment(1, "DOM - Other") -}}
 
-%%  if app == 'thunderbird'
+%%  if 'thunderbird' == app
 %%  	if config_OAuth is defined
 user_pref("javascript.enabled", {{ use_bool(config_OAuth) }});
 %%  	else

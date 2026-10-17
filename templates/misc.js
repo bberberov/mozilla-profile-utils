@@ -14,7 +14,7 @@
 
 user_pref("accessibility.force_disabled", 1);
 
-%%  if app == 'firefox' and 50 <= ver
+%%  if 'firefox' == app and 50 <= ver
 
 {{- comment(2, "Containers") -}}
 
@@ -41,10 +41,10 @@ user_pref("security.dialog_enable_delay", 1500);
 
 {{- comment(2, "Other") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 user_pref("browser.shell.checkDefaultBrowser",     false);
 user_pref("browser.uitour.enabled",                false);
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 user_pref("mail.shell.checkDefaultClient",         false);
 %%  endif
 %%  if ver < 83
@@ -75,7 +75,7 @@ user_pref("devtools.debugger.remote-enabled",         false);
 user_pref("devtools.anti-tracking.enabled",           false);
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 %%  	if true
 user_pref("browser.shell.shortcutFavicons",           false);

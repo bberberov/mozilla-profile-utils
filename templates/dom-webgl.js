@@ -10,7 +10,7 @@
 
 {{- comment(1, "DOM - WebGL") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if true
 user_pref("webgl.disabled",      {{ lte_bool(webgl, 0) }});
@@ -29,7 +29,7 @@ user_pref("webgl.disable-fail-if-major-performance-caveat",  true);
 // user_pref("webgl.min_capability_mode",                      {{ lte_bool(webgl, 1) }});
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("webgl.disabled",       true);

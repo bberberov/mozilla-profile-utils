@@ -38,7 +38,7 @@ user_pref("network.predictor.enable-prefetch",         false);
 %%  if true
 user_pref("network.http.speculative-parallel-limit",       0);
 %%  endif
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if 98 <= ver
 user_pref("browser.places.speculativeConnect.enabled", false);
 %%  	endif
@@ -64,7 +64,7 @@ user_pref("network.connectivity-service.enabled", false);
 // user_pref("network.connectivity-service.DNSv4.domain", "example.org"); // prev: "mozilla.org"
 // user_pref("network.connectivity-service.DNSv6.domain", "example.org"); // prev: "mozilla.org"
 %%  endif
-%%	if app == 'firefox' and ver < 57
+%%	if 'firefox' == app and ver < 57
 user_pref("browser.casting.enabled", false);
 %%  endif
 

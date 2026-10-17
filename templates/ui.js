@@ -12,7 +12,7 @@
 
 {{- comment(2, "about:config warning") -}}
 
-%%  if   app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if ver < 71
 user_pref("general.warnOnAboutConfig",       {{ use_bool(warn) }});
@@ -20,7 +20,7 @@ user_pref("general.warnOnAboutConfig",       {{ use_bool(warn) }});
 user_pref("browser.aboutConfig.showWarning", {{ use_bool(warn) }});
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("general.warnOnAboutConfig",       {{ use_bool(warn) }});
@@ -37,7 +37,7 @@ user_pref("browser.disableResetPrompt",  true);
 
 {{- comment(2, "Widgets") -}}
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 %%  	if true
 user_pref("layout.css.devPixelsPerPx",        "1.0");
@@ -103,13 +103,13 @@ user_pref("widget.non-native-theme.scrollbar.size.override", 20);
 
 {{- comment(2, "Tabs - Look") -}}
 
-%%  if   app == 'firefox'
+%%  if   'firefox' == app
 user_pref("browser.tabs.closeWindowWithLastTab",       false);
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 user_pref("mail.tabs.closeWindowWithLastTab",          false);
 %%  endif
 
-%%  if   app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if 95 <= ver
 user_pref("browser.tabs.inTitlebar",                       1);
@@ -117,7 +117,7 @@ user_pref("browser.tabs.inTitlebar",                       1);
 user_pref("browser.tabs.drawInTitlebar",                true);
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if 102 <= ver
 // user_pref("browser.tabs.inTitlebar",                       1);
@@ -128,17 +128,17 @@ user_pref("mail.tabs.drawInTitlebar",                   true);
 
 %%  endif
 
-%%  if   app == 'firefox'
+%%  if   'firefox' == app
 user_pref("browser.tabs.tabClipWidth",                   384);
 // user_pref("browser.tabs.tabMaxWidth",                    240);
 user_pref("browser.tabs.tabMinWidth",                    192);
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 user_pref("mail.tabs.tabClipWidth",                      384);
 user_pref("mail.tabs.tabMaxWidth",                       240);
 user_pref("mail.tabs.tabMinWidth",                       192);
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 %%  	if 73 <= ver
 user_pref("browser.tabs.tabmanager.enabled",            true);
 %%  	endif
@@ -191,7 +191,7 @@ user_pref("browser.tabs.tooltipsShowPidAndActiveness", {{ use_bool(debug) }});
  #  Firefox Specific
 -#}
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Tabs - Loading") -}}
 
@@ -281,13 +281,13 @@ user_pref("browser.toolbars.bookmarks.visibility",         "always");
 %%  	endif
 
 %%  endif
-{#- app == 'firefox' -#}
+{#- 'firefox' == app -#}
 
 {#-
  #  Thunderbird Specific
 -#}
 
-%%  if app == 'thunderbird'
+%%  if 'thunderbird' == app
 
 {{- comment(2, "Global") -}}
 
@@ -357,4 +357,4 @@ user_pref("mail.quota.mainwindow_threshold.critical", 80);
 %%  	endif
 
 %%  endif
-{#- app == 'thunderbird' -#}
+{#- 'thunderbird' == app -#}

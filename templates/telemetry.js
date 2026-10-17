@@ -41,7 +41,7 @@ user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 user_pref("toolkit.telemetry.updatePing.enabled",         false);
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Telemetry - Coverage") -}}
 
@@ -80,7 +80,7 @@ user_pref("browser.selfsupport.enabled", false);
 user_pref("breakpad.reportURL",                                   "");
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 %%  	if 58 <= ver
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
@@ -110,7 +110,7 @@ user_pref("datareporting.usage.uploadEnabled",           true);
 	{{- comment(3, "Daily usage ping") -}}
 %%  endif
 
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(2, "Telemetry - New Tab / Activity Stream") -}}
 

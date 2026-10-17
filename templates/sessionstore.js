@@ -9,7 +9,7 @@
 %%  from 'tools.jinja' import comment with context
 
 {#- Some settings are available in Thunderbird -#}
-%%  if app == 'firefox'
+%%  if 'firefox' == app
 
 {{- comment(1, "Session Store") -}}
 

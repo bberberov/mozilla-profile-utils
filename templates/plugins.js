@@ -53,7 +53,7 @@ user_pref("plugin.persistentPermissionAlways.intervalInDays",    1);
 user_pref("plugin.sessionPermissionNow.intervalInMinutes",      30);
 %%  	endif
 
-%%  	if app == 'firefox'
+%%  	if 'firefox' == app
 
 {{- comment(2, "Infobar") -}}
 

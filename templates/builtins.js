@@ -41,7 +41,7 @@ user_pref("pdfjs.enableScripting", false);
 	{{- comment(3, "(Default)") -}}
 %%  endif
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if 60 <= ver
 
@@ -97,7 +97,7 @@ user_pref("browser.ipProtection.enabled", false);
 	{{- comment(3, "(Default)") -}}
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 {{- comment(2, "Chat") -}}
 

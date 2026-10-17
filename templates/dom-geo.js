@@ -10,7 +10,7 @@
 
 {{- comment(1, "DOM - Geo") -}}
 
-%%  if app == 'firefox'
+%%  if   'firefox' == app
 
 %%  	if true
 // user_pref("geo.enabled",                         false);
@@ -41,7 +41,7 @@ user_pref("geo.provider.use_gpsd",               false);
 user_pref("geo.security.allowinsecure",          false);
 %%  	endif
 
-%%  elif app == 'thunderbird'
+%%  elif 'thunderbird' == app
 
 %%  	if true
 user_pref("geo.enabled", false);

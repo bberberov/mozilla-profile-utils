@@ -36,7 +36,9 @@ user_pref("browser.bookmarks.max_backups", 0);
 {{- comment(2, "Places - Icons") -}}
 
 %%  if 'thunderbird' == app
-user_pref("browser.chrome.site_icons", false);
+user_pref("browser.chrome.favicons",      false);
+user_pref("browser.chrome.guess_favicon", false);
+user_pref("browser.chrome.site_icons",    false);
 %%  endif
 
 {{- comment(2, "Places - History") -}}

@@ -10,7 +10,7 @@
 
 {{- comment(1, "Mouse") -}}
 
-%%  if 115 <= ver
+%%  if 'firefox' == app and 115 <= ver
 user_pref("browser.tabs.searchclipboardfor.middleclick", false);
 	{{- comment(3, "(Default, except on Linux)") -}}
 %%  endif

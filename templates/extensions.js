@@ -40,11 +40,13 @@ user_pref("extensions.update.autoUpdateDefault", false);
 
 {{- comment(2, "Recommendations") -}}
 
-%%  if 65 <= ver
+%%  if 'firefox' == app
+%%  	if 65 <= ver
 user_pref("browser.discovery.enabled",                          false);
-%%  endif
-%%  if true
+%%  	endif
+%%  	if true
 user_pref("extensions.getAddons.showPane",                      false);
+%%  	endif
 %%  endif
 %%  if 68 <= ver
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
@@ -59,11 +61,15 @@ user_pref("extensions.autoDisableScopes", 14);
 user_pref("extensions.startupScanScopes",  3);
 %%  endif
 
-%%  if 'firefox' == app
-
 {{- comment(2, "3rd Party") -}}
 
+%%  if 'firefox' == app
 %%  	if 82 <= ver
 user_pref("extensions.postDownloadThirdPartyPrompt", false);
 %%  	endif
+%%  endif
+
+%%  if 'thunderbird' == app
+// user_pref("mail.cloud_files.enabled", false);
+	{{- comment(3, "FileLink support") -}}
 %%  endif

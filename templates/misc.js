@@ -12,7 +12,18 @@
 
 {{- comment(2, "Accessibility") -}}
 
+%%  if true
 user_pref("accessibility.force_disabled", 1);
+%%  endif
+
+{{- comment(2, "Check default") -}}
+
+%%  if   'firefox' == app
+user_pref("browser.shell.checkDefaultBrowser",     false);
+user_pref("browser.uitour.enabled",                false);
+%%  elif 'thunderbird' == app
+user_pref("mail.shell.checkDefaultClient",         false);
+%%  endif
 
 %%  if 'firefox' == app and 50 <= ver
 
@@ -41,12 +52,6 @@ user_pref("security.dialog_enable_delay", 1500);
 
 {{- comment(2, "Other") -}}
 
-%%  if   'firefox' == app
-user_pref("browser.shell.checkDefaultBrowser",     false);
-user_pref("browser.uitour.enabled",                false);
-%%  elif 'thunderbird' == app
-user_pref("mail.shell.checkDefaultClient",         false);
-%%  endif
 %%  if ver < 83
 user_pref("security.block_script_with_wrong_mime",  true);
 %%  endif
@@ -64,10 +69,6 @@ user_pref("browser.onboarding.enabled",               false);
 user_pref("browser.pagethumbnails.capturing_disabled", true);
 	{{- comment(3, "(Hidden)") -}}
 %%  endif
-%%  if 144 <= ver
-user_pref("browser.profiles.enabled",                 false);
-	{{- comment(3, "(Default true since 150)") -}}
-%%  endif
 %%  if true
 user_pref("devtools.debugger.remote-enabled",         false);
 %%  endif
@@ -75,8 +76,23 @@ user_pref("devtools.debugger.remote-enabled",         false);
 user_pref("devtools.anti-tracking.enabled",           false);
 %%  endif
 
-%%  if 'firefox' == app
+%%  if 95 <= ver
+##
+// user_pref("privacy.globalprivacycontrol.enabled",                true);
+// user_pref("privacy.globalprivacycontrol.functionality.enabled",  true);
+{{- comment(3, "(Default true since 120)") -}}
+// user_pref("privacy.globalprivacycontrol.pbmode.enabled",         true);
+##- TODO: unknown introduction
+%%  endif
 
+%%  if   'firefox' == app
+
+{{- comment(2, "Other - Firefox-specific") -}}
+
+%%  	if 144 <= ver
+user_pref("browser.profiles.enabled",                 false);
+	{{- comment(3, "(Default true since 150)") -}}
+%%  	endif
 %%  	if true
 user_pref("browser.shell.shortcutFavicons",           false);
 %%  	endif
@@ -102,13 +118,15 @@ user_pref("browser.startup.homepage_override.mstone",     "ignore");
 	{{- comment(3, "(Default true since 135)") -}}
 %%  	endif
 
-%%  endif
+%%  elif 'thunderbird' == app
 
-%%  if 95 <= ver
-##
-// user_pref("privacy.globalprivacycontrol.enabled",                true);
-// user_pref("privacy.globalprivacycontrol.functionality.enabled",  true);
-	{{- comment(3, "(Default true since 120)") -}}
-// user_pref("privacy.globalprivacycontrol.pbmode.enabled",         true);
-##- TODO: unknown introduction
+{{- comment(2, "Other - Thunderbird-specific") -}}
+
+%%  	if true
+user_pref("mail.rights.override",                true);
+user_pref("mailnews.start_page.enabled",         false);
+user_pref("mailnews.start_page_override.mstone", "ignore");
+	{{- comment(3, "(Hidden)") -}}
+%%  	endif
+
 %%  endif

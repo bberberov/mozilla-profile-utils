@@ -108,6 +108,8 @@ user_pref("mail.chat.enabled",     false);
 {{- comment(2, "Provider") -}}
 
 %%  	if true
-user_pref("mail.provider.enabled", false);
+user_pref("mail.provider.enabled",                    false);
+user_pref("mail.provider.suppress_dialog_on_startup",  true);
+	{{- comment(3, "(Hidden)") -}}
 %%  	endif
 %%  endif

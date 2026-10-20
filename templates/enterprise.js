@@ -14,5 +14,7 @@
 // user_pref("browser.contentanalysis.enabled",        false);
 %%  endif
 %%  if 127 <= ver
-// user_pref("browser.contentanalysis.default_result",     0);
+// user_pref("browser.contentanalysis.default_result", 0);
 %%  endif
+user_pref("browser.policies.loglevel",              "warn");
+	{{- comment(3, "(Hidden) Default is 'warn' in FF and 'error' in TB") -}}

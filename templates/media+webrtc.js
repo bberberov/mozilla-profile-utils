@@ -12,9 +12,13 @@
 
 {{- comment(2, "Media") -}}
 
+%%  if 'thunderbird' == app
+user_pref("media.ffmpeg.enabled",          false);
+%%  endif
+
 %%  if true
-user_pref("media.navigator.enabled",                  false);
-user_pref("media.navigator.video.enabled",            false);
+user_pref("media.navigator.enabled",       false);
+user_pref("media.navigator.video.enabled", false);
 %%  endif
 
 {{- comment(2, "WebRTC") -}}

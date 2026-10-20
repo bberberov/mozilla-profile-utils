@@ -22,6 +22,11 @@ user_pref("browser.download.forbid_open_with",                     {{ use_bool(p
 %%  if true
 user_pref("browser.download.manager.addToRecentDocs",              false);
 %%  endif
+%%  if 'thunderbird' == app
+user_pref("browser.download.manager.focusWhenStarting",             true);
+user_pref("browser.download.manager.showAlertOnComplete",           true);
+user_pref("browser.download.manager.showWhenStarting",              true);
+%%  endif
 %%  if 102 <= ver
 user_pref("browser.download.start_downloads_in_tmp_dir",            true);
 %%  endif

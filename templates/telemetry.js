@@ -40,6 +40,10 @@ user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 %%  if 56 <= ver
 user_pref("toolkit.telemetry.updatePing.enabled",         false);
 %%  endif
+%%  if 'thunderbird' == app
+user_pref("toolkit.telemetry.ecosystemtelemetry.enabled", false);
+	{{- comment(3, "(Default)") -}}
+%%  endif
 
 %%  if 'firefox' == app
 

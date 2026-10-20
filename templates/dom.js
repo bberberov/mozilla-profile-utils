@@ -131,8 +131,12 @@ user_pref("javascript.options.shared_memory",                      false);
 
 {{- comment(2, "Events") -}}
 
-%%  if true
+%%  if   'firefox' == app
 // user_pref("dom.event.contextmenu.enabled",  false);
+%%  elif 'thunderbird' == app
+user_pref("dom.event.contextmenu.enabled",  false);
+%%  endif
+%%  if true
 // user_pref("dom.w3c_pointer_events.enabled", false); // In FINGERPRINTING
 // user_pref("dom.w3c_touch_events.enabled",       0); // In FINGERPRINTING
 %%  endif

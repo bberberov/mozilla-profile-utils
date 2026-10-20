@@ -106,6 +106,7 @@ user_pref("widget.non-native-theme.scrollbar.size.override", 20);
 %%  if   'firefox' == app
 user_pref("browser.tabs.closeWindowWithLastTab",       false);
 %%  elif 'thunderbird' == app
+user_pref("mail.tabs.autoHide",                        false);
 user_pref("mail.tabs.closeWindowWithLastTab",          false);
 %%  endif
 
@@ -292,14 +293,17 @@ user_pref("browser.toolbars.bookmarks.visibility",         "always");
 {{- comment(2, "Global") -}}
 
 %%  	if true
-// user_pref("mail.uidensity",  0);
+user_pref("mail.uidensity",  0);
 // user_pref("mail.uifontsize", 0);
 %%  	endif
 
 {{- comment(2, "Folderpane") -}}
 
-%%  	if true
+%%  	if ver < 140
+{#- NOTE: Removed sometime before 140  -#}
 user_pref("mail.folderpane.showColumns",    true);
+%%  	endif
+%%  	if true
 user_pref("mail.folderpane.sumSubfolders", false);
 %%  	endif
 
@@ -328,7 +332,12 @@ user_pref("mailnews.default_sort_order",                       2);
 	{{- comment(3, "Sort descending") -}}
 user_pref("mailnews.default_sort_type",                       18);
 	{{- comment(3, "Sory by date") -}}
+%%  	endif
+%%  	if ver < 140
+{#- NOTE: Removed sometime before 140  -#}
 // user_pref("mailnews.message_display.allow_plugins",        false);
+%%  	endif
+%%  	if true
 user_pref("mailnews.message_display.disable_remote_image",  true);
 %%  	endif
 

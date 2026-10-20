@@ -37,6 +37,11 @@ user_pref("browser.disableResetPrompt",  true);
 
 {{- comment(2, "Widgets") -}}
 
+%%  if 151 <= ver
+user_pref("browser.nova.enabled",             false);
+	{{- comment(3, "(Default true since 157)") -}}
+%%  endif
+
 %%  if 'firefox' == app
 
 %%  	if true
